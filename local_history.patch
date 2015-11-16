@@ -1,0 +1,24 @@
+Index: form_service/src/main/java/com/springapp/mvc/repository/impl/AddressRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- form_service/src/main/java/com/springapp/mvc/repository/impl/AddressRepository.java	(revision )
++++ form_service/src/main/java/com/springapp/mvc/repository/impl/AddressRepository.java	(revision )
+@@ -7,6 +7,7 @@
+ import org.hibernate.Session;
+ import org.hibernate.SessionFactory;
+ import org.springframework.stereotype.Repository;
++import org.springframework.transaction.annotation.Transactional;
+ 
+ import javax.annotation.Resource;
+ import java.util.List;
+@@ -14,7 +15,7 @@
+ 
+ @Repository
+ //@Transactional
+-public class AddressRepository implements IUserRepository {
++public class UserRepository implements IUserRepository {
+ 
+     @Resource(name = "sessionFactory")
+     public SessionFactory sessionFactory;
