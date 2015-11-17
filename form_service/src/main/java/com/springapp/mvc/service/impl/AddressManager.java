@@ -2,7 +2,6 @@ package com.springapp.mvc.service.impl;
 
 import com.springapp.mvc.exception.DatabaseException;
 import com.springapp.mvc.model.Address;
-import com.springapp.mvc.model.User;
 import com.springapp.mvc.repository.IAddressRepository;
 import com.springapp.mvc.service.IAddressManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +14,16 @@ public class AddressManager implements IAddressManager {
     private IAddressRepository repository;
 
     @Override
-    public void addAddress(User user, Address address) throws DatabaseException {
+    public void addAddress(Address address) throws DatabaseException {
         try {
-            repository.addAddress(user, address);
+            repository.addAddress(address);
         } catch (Exception e) {
             throw new DatabaseException(e);
         }
     }
 
     @Override
-    public void removeAddress(User user) {
+    public void removeAddress(Address address) {
 
     }
 

@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -45,10 +46,10 @@ public class AddContact {
             contact.setHomeNumber(homeNumber);
             contact.setMobileNumber(mobileNumber);
             try {
-//                User contactUser = userManager.findUserByEmail(sessionUser);
-                contactManager.addContact(sessionUser, contact);
+                contact.setUser(sessionUser);
+                contactManager.addContact(contact);
             } catch (DatabaseException e) {
-                throw  new DatabaseException("",e);
+                throw new DatabaseException("", e);
             }
         }
         return "redirect:" + path;

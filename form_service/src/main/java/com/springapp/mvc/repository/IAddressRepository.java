@@ -6,7 +6,7 @@ import com.springapp.mvc.model.User;
 
 public interface IAddressRepository {
 
-    void addAddress(User user, Address address) throws DatabaseException;
+    void addAddress(Address address) throws DatabaseException;
 
     void removeAddress(User user);
 

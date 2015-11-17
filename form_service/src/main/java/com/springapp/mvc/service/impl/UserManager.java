@@ -2,6 +2,7 @@ package com.springapp.mvc.service.impl;
 
 import com.springapp.mvc.exception.DatabaseException;
 import com.springapp.mvc.model.User;
+import com.springapp.mvc.model.dto.LazyUser;
 import com.springapp.mvc.repository.IUserRepository;
 import com.springapp.mvc.service.IUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class UserManager implements IUserManager {
     }
 
     @Override
-    public User findUserByEmailLazy(User user) {
+    public LazyUser findUserByEmailLazy(User user) {
         return repository.findUserByEmailLazy(user);
     }
 

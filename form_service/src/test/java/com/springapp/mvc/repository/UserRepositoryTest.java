@@ -1,6 +1,7 @@
 package com.springapp.mvc.repository;
 
 
+import com.springapp.mvc.model.User;
 import com.springapp.mvc.repository.config.PersistenceConfigTest;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -14,24 +15,28 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
+import static com.springapp.mvc.util_test.UserUtilTest.getCustomUser;
+import static com.springapp.mvc.util_test.UserUtilTest.getUserList;
+import static junit.framework.TestCase.assertNotNull;
+import static org.mockito.Mockito.verify;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes= {PersistenceConfigTest.class})
-@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
-        DirtiesContextTestExecutionListener.class,
-        TransactionalTestExecutionListener.class,
-})
-//@TransactionConfiguration(transactionManager = "transactionManager")
-//@Transactional
+//@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
+//        DirtiesContextTestExecutionListener.class,
+//        TransactionalTestExecutionListener.class,
+//})
+@TransactionConfiguration(transactionManager = "transactionManager")
+@Transactional
 
 public class UserRepositoryTest {
 
 
     @Autowired
-IUserRepository userRepository;
+IUserRepository repository;
 
-//
-//    @InjectMocks
-//    IUserRepository repository = new UserRepository();
 
 
 //    @Before
@@ -41,7 +46,7 @@ IUserRepository userRepository;
 
     @Test
     public void testAddUser() throws Exception {
-//        repository.addUser(getCustomUser());
+        repository.addUser(getCustomUser());
 
     }
 
@@ -52,30 +57,31 @@ IUserRepository userRepository;
 //        verify(repository).removeUser(userList.get(0));
 //    }
 //
-//    @Test
-//    public void testFindUserByEmail() throws Exception {
-//        User user = getCustomUser();
-//        User u = repository.findUserByEmail(user);
-//        assertNotNull(u);
-//    }
-//
-//    @Test
-//    public void testGetAllUser() throws Exception {
-//        List<User> users =repository.getAllUser();
-//        assertNotNull(users);
-//    }
+    @Test
+    public void testFindUserByEmail() throws Exception {
+        User user = getCustomUser();
+        user.setEmail("aaa");
+        User u = repository.findUserByEmail(user);
+        assertNotNull(u);
+    }
+
+    @Test
+    public void testGetAllUser() throws Exception {
+        List<User> users =repository.getAllUser();
+        assertNotNull(users);
+    }
 //
 //    @Test
 //    public void testEditUser() throws Exception {
 //        User user =getCustomUser();
 //        repository.editUser(user);
 //    }
-//
-//    @Test
-//    public void testIsExistingUser() throws Exception {
-//        repository.isExistingUser(getCustomUser());
-//
-//
-//    }
+
+    @Test
+    public void testIsExistingUser() throws Exception {
+        repository.isExistingUser(getCustomUser());
+
+
+    }
 
 }

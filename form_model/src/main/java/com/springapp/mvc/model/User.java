@@ -1,8 +1,5 @@
 package com.springapp.mvc.model;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -37,7 +34,7 @@ public class User {
     private List<Address> address;
 
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-    @Fetch(FetchMode.SELECT)
+//    @Fetch(FetchMode.SELECT)
     private List<Contact> contact;
 
     public User(){}

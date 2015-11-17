@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-//@PropertySource({"classpath:persistence-mysql.properties"})
 @ComponentScan({"com.springapp.mvc"})
 public class PersistenceConfigTest {
 

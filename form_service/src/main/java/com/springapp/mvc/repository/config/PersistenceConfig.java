@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-//@PropertySource({"classpath:persistence-mysql.properties"})
 @ComponentScan({"com.springapp.mvc"})
 public class PersistenceConfig {
 
@@ -40,6 +39,7 @@ public class PersistenceConfig {
         dataSource.setUrl("jdbc:mysql://localhost:3306/java1");
         dataSource.setUsername("root");
         dataSource.setPassword("");
+        dataSource.setMaxWait(5000);
         return dataSource;
     }
 
@@ -58,11 +58,11 @@ public class PersistenceConfig {
 
     Properties hibernateProperties() {
         return new Properties() {
-
             {
                 setProperty("hibernate.hbm2ddl.auto", "update");
                 setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
                 setProperty("hibernate.globally_quoted_identifiers", "true");
+//                setProperty("hibernate.defaultTimeout", "5");
             }
         };
     }

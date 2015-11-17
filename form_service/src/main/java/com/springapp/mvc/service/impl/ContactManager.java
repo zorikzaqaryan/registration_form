@@ -16,12 +16,12 @@ public class ContactManager implements IContactManager {
     IContactRepository repository;
 
     @Override
-    public void addContact(User user, Contact contact) throws DatabaseException {
-        repository.addContact(user,contact);
+    public void addContact(Contact contact) throws DatabaseException {
+        repository.addContact(contact);
     }
 
     @Override
-    public void removeContact(User user) {
+    public void removeContact(Contact contact) {
 
     }
 

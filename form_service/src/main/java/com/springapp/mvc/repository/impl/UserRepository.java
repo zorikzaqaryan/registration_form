@@ -2,6 +2,7 @@ package com.springapp.mvc.repository.impl;
 
 import com.springapp.mvc.exception.DatabaseException;
 import com.springapp.mvc.model.User;
+import com.springapp.mvc.model.dto.LazyUser;
 import com.springapp.mvc.repository.IUserRepository;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -9,12 +10,12 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Repository
-@Transactional
+@Transactional(timeout = 10)
 public class UserRepository extends BaseRepository implements IUserRepository {
-
 
 
     @Override
@@ -51,19 +52,19 @@ public class UserRepository extends BaseRepository implements IUserRepository {
     }
 
     @Override
-    public User findUserByEmailLazy(User user) {
-        String hql = "SELECT u.id,u.email,u.name from User u where u.email= :email";
+    public LazyUser findUserByEmailLazy(User user) {
+        String hql = "from LazyUser u where u.email= :email";
         Query query;
-        User lazyUser = new User();
+        LazyUser lazyUser = new LazyUser();
         try {
             Session session = sessionFactory.openSession();
             query = session.createQuery(hql);
             query.setParameter("email", user.getEmail());
-            Object[] obj  = (Object[]) query.list().get(0);
-            lazyUser.setId((Long) obj[0]);
-            lazyUser.setEmail((String) obj[1]);
-            lazyUser.setEmail((String) obj[2]);
-
+//            Object[] obj  = (Object[]) query.list().get(0);
+//            lazyUser.setId((Long) obj[0]);
+//            lazyUser.setEmail((String) obj[1]);
+//            lazyUser.setEmail((String) obj[2]);
+            lazyUser = (LazyUser) query.uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -123,8 +124,8 @@ public class UserRepository extends BaseRepository implements IUserRepository {
             Session session = sessionFactory.openSession();
             Query query = session.createQuery(hql);
             query.setParameter("email", user.getEmail());
-            if(query.uniqueResult()!=null){
-            return true;
+            if (query.uniqueResult() != null) {
+                return true;
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -13,18 +13,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Repository
-@Transactional
+@org.springframework.transaction.annotation.Transactional(timeout = 10)
 public class ContactRepository extends BaseRepository implements IContactRepository{
 
     @Override
-    public void addContact(User user, Contact contact) throws DatabaseException {
+    public void addContact(Contact contact) throws DatabaseException {
         try {
-            List<Contact> contactList = user.getContact();
-            if (contactList == null) {
-                contactList = new LinkedList<>();
-            }
-            contactList.add(contact);
-            contact.setUser(user);
+//            List<Contact> contactList = user.getContact();
+//            if (contactList == null) {
+//                contactList = new LinkedList<>();
+//            }
+//            contactList.add(contact);
+//            contact.setUser(user);
             Session session = sessionFactory.getCurrentSession();
             if (session == null) {
                 session = sessionFactory.openSession();
@@ -38,7 +38,7 @@ public class ContactRepository extends BaseRepository implements IContactReposit
     }
 
     @Override
-    public void removeContact(User user) {
+    public void removeContact(Contact contact) {
 
     }
 

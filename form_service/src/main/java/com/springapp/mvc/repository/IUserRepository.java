@@ -3,6 +3,7 @@ package com.springapp.mvc.repository;
 
 import com.springapp.mvc.exception.DatabaseException;
 import com.springapp.mvc.model.User;
+import com.springapp.mvc.model.dto.LazyUser;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface IUserRepository {
 
     User findUserByEmail(User user);
 
-    User findUserByEmailLazy(User user);
+    LazyUser findUserByEmailLazy(User user);
 
     User getLazyUser(User user);
 

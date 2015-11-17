@@ -2,6 +2,8 @@ package com.springapp.mvc.service;
 
 import com.springapp.mvc.exception.DatabaseException;
 import com.springapp.mvc.model.User;
+import com.springapp.mvc.model.dto.LazyUser;
+
 import java.util.List;
 
 public interface IUserManager {
@@ -18,5 +20,5 @@ public interface IUserManager {
 
     boolean isExistingUser(User user);
 
-    User findUserByEmailLazy(User user);
+    LazyUser findUserByEmailLazy(User user);
 }

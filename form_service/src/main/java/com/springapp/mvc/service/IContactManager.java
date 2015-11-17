@@ -7,9 +7,9 @@ import com.springapp.mvc.model.User;
 
 public interface IContactManager {
 
-    void addContact(User user, Contact contact) throws DatabaseException;
+    void addContact(Contact contact) throws DatabaseException;
 
-    void removeContact(User user);
+    void removeContact(Contact contact);
 
     void editContact(Contact contact);
 }

@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface IContactRepository {
 
-    void addContact(User user, Contact contact) throws DatabaseException;
+    void addContact(Contact contact) throws DatabaseException;
 
-    void removeContact(User user);
+    void removeContact(Contact contact);
 
     List<User> getAllContact();
 

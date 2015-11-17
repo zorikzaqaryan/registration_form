@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface IAddressManager {
 
-    void addAddress(User user, Address address) throws DatabaseException;
+    void addAddress(Address address) throws DatabaseException;
 
-    void removeAddress(User user);
+    void removeAddress(Address address);
 
     void editAddress(Address address);
 }

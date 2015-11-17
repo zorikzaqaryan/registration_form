@@ -4,6 +4,8 @@ import com.springapp.mvc.exception.DatabaseException;
 import com.springapp.mvc.model.Address;
 import com.springapp.mvc.model.User;
 
+import com.springapp.mvc.model.convertor.UserConverter;
+import com.springapp.mvc.model.dto.LazyUser;
 import com.springapp.mvc.service.impl.AddressManager;
 import com.springapp.mvc.service.impl.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+
+import static com.springapp.mvc.model.convertor.UserConverter.lazyUserToUser;
 
 @Controller
 @RequestMapping(value = "addAddress")
@@ -41,7 +45,8 @@ public class AddAddress {
     private String addContactToUser(@RequestParam(value = "city") String city,
                                     @RequestParam(value = "street") String street) throws DatabaseException {
         String path = "userHome";
-        User currentUser = (User) request.getSession().getAttribute("currentUser");
+        LazyUser currentUser = (LazyUser) request.getSession().getAttribute("currentUser");
+        User user = lazyUserToUser(currentUser);
         if (StringUtils.isEmpty(city) && StringUtils.isEmpty(street)) {
             path = "addAddress";
         } else {
@@ -49,7 +54,9 @@ public class AddAddress {
             address.setCity(city);
             address.setStreet(street);
             try {
-                addressManager.addAddress(currentUser, address);
+//                user.getAddress().add(address);
+                address.setUser(user);
+                addressManager.addAddress(address);
             } catch (DatabaseException e) {
                 throw  new DatabaseException(e);
             }

@@ -2,6 +2,7 @@ package com.springapp.mvc.controller;
 
 import com.springapp.mvc.controller.validator.RegistrationValidator;
 import com.springapp.mvc.model.User;
+import com.springapp.mvc.model.dto.LazyUser;
 import com.springapp.mvc.service.impl.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -58,7 +59,7 @@ public class Login {
 
         if (isValid) {
 
-            User currentUser = manager.findUserByEmailLazy(user);
+            LazyUser currentUser = manager.findUserByEmailLazy(user);
             session.setAttribute("currentUser", currentUser);
 
         } else {
